@@ -47,17 +47,27 @@ const queriesToRun = queries.length > 0 ? queries : waveFlag ? WAVE_FLAGS[waveFl
 
 async function upsertBook(book) {
   const result = await pool.query(
-    `INSERT INTO books (google_books_id, title, author, cover_url, description, genre, release_date)
-     VALUES ($1, $2, $3, $4, $5, $6, $7)
+    `INSERT INTO books (google_books_id, title, author, cover_url, description, genre, language, release_date)
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
      ON CONFLICT (google_books_id) DO UPDATE SET
        title = EXCLUDED.title,
        author = EXCLUDED.author,
        cover_url = EXCLUDED.cover_url,
        description = EXCLUDED.description,
        genre = EXCLUDED.genre,
+       language = EXCLUDED.language,
        release_date = EXCLUDED.release_date
      RETURNING id, (xmax = 0) AS inserted`,
-    [book.google_books_id, book.title, book.author, book.cover_url, book.description, book.genre, book.release_date]
+    [
+      book.google_books_id,
+      book.title,
+      book.author,
+      book.cover_url,
+      book.description,
+      book.genre,
+      book.language,
+      book.release_date,
+    ]
   );
   return result.rows[0];
 }

@@ -18,17 +18,27 @@ import { inferTheme } from "./themeHeuristics.js";
 
 async function upsertBook(book) {
   const result = await pool.query(
-    `INSERT INTO books (google_books_id, title, author, cover_url, description, genre, release_date)
-     VALUES ($1, $2, $3, $4, $5, $6, $7)
+    `INSERT INTO books (google_books_id, title, author, cover_url, description, genre, language, release_date)
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
      ON CONFLICT (google_books_id) DO UPDATE SET
        title = EXCLUDED.title,
        author = EXCLUDED.author,
        cover_url = COALESCE(EXCLUDED.cover_url, books.cover_url),
        description = COALESCE(EXCLUDED.description, books.description),
        genre = COALESCE(EXCLUDED.genre, books.genre),
+       language = COALESCE(EXCLUDED.language, books.language),
        release_date = COALESCE(EXCLUDED.release_date, books.release_date)
      RETURNING id, (xmax = 0) AS inserted`,
-    [book.google_books_id, book.title, book.author, book.cover_url, book.description, book.genre, book.release_date]
+    [
+      book.google_books_id,
+      book.title,
+      book.author,
+      book.cover_url,
+      book.description,
+      book.genre,
+      book.language,
+      book.release_date,
+    ]
   );
   return result.rows[0];
 }
@@ -98,6 +108,7 @@ async function main() {
         cover_url: nytBook.cover_url,
         description: nytBook.description,
         genre: null,
+        language: "en", // les listes NYT ne couvrent que l'édition américaine
         release_date: null,
       };
       if (!book.google_books_id || !book.title) continue;

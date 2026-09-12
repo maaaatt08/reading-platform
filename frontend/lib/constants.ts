@@ -82,6 +82,23 @@ export const THEME_OPTIONS = [
   "true-crime",
 ];
 
+export const LANGUAGE_OPTIONS = ["fr", "en", "es", "de", "it", "pt", "ja", "zh", "ko", "ru", "ar", "nl"];
+
+export const LANGUAGE_LABELS: Record<string, string> = {
+  fr: "Français",
+  en: "Anglais",
+  es: "Espagnol",
+  de: "Allemand",
+  it: "Italien",
+  pt: "Portugais",
+  ja: "Japonais",
+  zh: "Chinois",
+  ko: "Coréen",
+  ru: "Russe",
+  ar: "Arabe",
+  nl: "Néerlandais",
+};
+
 export const THEME_LABELS: Record<string, string> = {
   roman: "Roman",
   policier: "Policier",

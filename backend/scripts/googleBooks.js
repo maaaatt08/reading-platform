@@ -17,6 +17,16 @@ function truncate(str, maxLength) {
   return str.length > maxLength ? str.slice(0, maxLength - 1) + "…" : str;
 }
 
+// Beaucoup de "livres" indexés par Google sont en fait des résumés/fiches de lecture
+// tierces (ex: "Résumé - Zero to One de Peter Thiel"), pas l'œuvre elle-même — on les
+// exclut dès l'import plutôt que de polluer le catalogue.
+const JUNK_TITLE_PATTERN =
+  /^(résumé|resume|summary|book summary|summary of|study guide|guide de lecture|zusammenfassung|sparknotes)\b|:\s*(résumé|summary)\b/i;
+
+export function isJunkTitle(title) {
+  return !!title && JUNK_TITLE_PATTERN.test(title);
+}
+
 function normalizeVolume(volume) {
   const info = volume.volumeInfo || {};
   return {
@@ -27,6 +37,7 @@ function normalizeVolume(volume) {
     description: info.description || null,
     // 50 (pas 100) car ce champ est aussi réutilisé comme book_tags.tag_value (VARCHAR(50))
     genre: truncate(info.categories?.[0]?.split("/")[0]?.trim() || null, 50),
+    language: info.language || null,
     release_date: normalizeDate(info.publishedDate),
   };
 }
@@ -57,7 +68,7 @@ export async function searchGoogleBooks(query, { maxResults = 20 } = {}) {
 
     for (const item of items) {
       const book = normalizeVolume(item);
-      if (book.title) results.push(book);
+      if (book.title && !isJunkTitle(book.title)) results.push(book);
     }
 
     if (items.length < pageSize) break; // dernière page

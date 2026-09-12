@@ -20,6 +20,7 @@ CREATE TABLE books (
     cover_url TEXT,
     description TEXT,
     genre VARCHAR(100),
+    language VARCHAR(10), -- code ISO 639-1 ("fr", "en"...), pour filtrer par langue
     release_date DATE,
     created_at TIMESTAMP DEFAULT NOW()
 );
@@ -82,3 +83,4 @@ CREATE INDEX idx_user_books_book ON user_books(book_id);
 CREATE INDEX idx_reviews_book ON reviews(book_id);
 CREATE INDEX idx_book_tags_book ON book_tags(book_id);
 CREATE INDEX idx_books_release_date ON books(release_date);
+CREATE INDEX idx_books_language ON books(language);

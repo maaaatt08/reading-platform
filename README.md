@@ -21,12 +21,14 @@ reading-platform/
 │   │   ├── import-books.js         # Import de livres depuis l'API Google Books
 │   │   ├── import-nyt-bestsellers.js  # Import des listes de bestsellers du New York Times
 │   │   ├── backfill-tags.js        # Pose les tags literature/theme sur les livres déjà importés
+│   │   ├── cleanup-catalog.js      # Supprime les doublons/entrées résumé, devine la langue manquante
 │   │   ├── tag-book.js             # Ajout/retrait manuel d'un tag mood/pace/genre/literature/theme
 │   │   ├── googleBooks.js          # Client Google Books (recherche + normalisation)
 │   │   ├── nytBooks.js             # Client NYT Books API (listes de bestsellers)
 │   │   ├── tagHeuristics.js        # Devine des tags mood/pace par mots-clés
 │   │   ├── literatureMap.js        # Devine la tradition littéraire (française, russe...) par auteur
 │   │   ├── themeHeuristics.js      # Devine le thème/genre (roman, policier, essai...) par catégorie+mots-clés
+│   │   ├── languageHeuristic.js    # Devine la langue (fr/en) des livres importés avant l'ajout de ce champ
 │   │   └── seedQueries.js          # Requêtes par défaut pour peupler la base (par vagues)
 │   ├── package.json
 │   └── .env.example
@@ -133,6 +135,15 @@ Ces deux tags sont posés automatiquement par `import-books.js` et `import-nyt-b
 ```bash
 npm run backfill-tags
 ```
+
+## Doublons et langues
+Une recherche Google Books remonte souvent plusieurs éditions/traductions d'un même livre (parfois même de vraies entrées dupliquées avec un `google_books_id` différent). Deux mesures :
+- Chaque livre a désormais une **langue** (`books.language`, code ISO comme `fr`/`en`), capturée directement depuis Google Books à l'import. Le filtre **Langue** sur Découvrir permet de ne voir qu'une édition à la fois plutôt que toutes les traductions mélangées.
+- `scripts/cleanup-catalog.js` supprime les entrées "résumé/summary" (fiches de lecture tierces) et les doublons exacts (même titre+auteur, contenu identique ou vide) déjà en base :
+```bash
+npm run cleanup-catalog
+```
+Les futurs imports filtrent déjà les entrées "résumé/summary" à la source (`googleBooks.js`), donc ce script sert surtout à nettoyer ponctuellement le catalogue existant.
 
 ## Ce qui reste à faire
 - Relire/corriger les tags posés automatiquement (heuristiques par mots-clés/auteur, pas parfaites)

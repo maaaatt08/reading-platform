@@ -24,11 +24,12 @@ export type Book = {
   cover_url: string | null;
   description?: string | null;
   genre: string | null;
+  language?: string | null;
   release_date: string | null;
   created_at: string;
 };
 
-export type BookTag = { tag_type: "mood" | "pace" | "genre"; tag_value: string };
+export type BookTag = { tag_type: "mood" | "pace" | "genre" | "literature" | "theme"; tag_value: string };
 
 export type Review = {
   id: number;

@@ -3,10 +3,10 @@ import pool from '../db/pool.js';
 
 const router = Router();
 
-// GET /books?search=&mood=&pace=&genre=&literature=&theme=
-// Recherche de livres avec filtres optionnels par mood/pace/genre/littérature/thème
+// GET /books?search=&mood=&pace=&genre=&literature=&theme=&language=
+// Recherche de livres avec filtres optionnels par mood/pace/genre/littérature/thème/langue
 router.get('/', async (req, res) => {
-  const { search, mood, pace, genre, literature, theme } = req.query;
+  const { search, mood, pace, genre, literature, theme, language } = req.query;
 
   try {
     let query = `
@@ -48,6 +48,10 @@ router.get('/', async (req, res) => {
       query += ` AND EXISTS (
         SELECT 1 FROM book_tags WHERE book_id = b.id AND tag_type = 'theme' AND tag_value = $${params.length}
       )`;
+    }
+    if (language) {
+      params.push(language);
+      query += ` AND b.language = $${params.length}`;
     }
 
     query += ' ORDER BY b.title LIMIT 50';

@@ -9,6 +9,8 @@ import {
   LITERATURE_LABELS,
   THEME_OPTIONS,
   THEME_LABELS,
+  LANGUAGE_OPTIONS,
+  LANGUAGE_LABELS,
 } from "@/lib/constants";
 import type { Book } from "@/lib/types";
 import { BookCard } from "@/components/BookCard";
@@ -20,6 +22,7 @@ export default function DiscoverPage() {
   const [pace, setPace] = useState("");
   const [literature, setLiterature] = useState("");
   const [theme, setTheme] = useState("");
+  const [language, setLanguage] = useState("");
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
@@ -28,7 +31,7 @@ export default function DiscoverPage() {
     e?.preventDefault();
     setLoading(true);
     try {
-      const results = await api.searchBooks({ search, mood, pace, literature, theme });
+      const results = await api.searchBooks({ search, mood, pace, literature, theme, language });
       setBooks(results);
     } finally {
       setLoading(false);
@@ -49,9 +52,10 @@ export default function DiscoverPage() {
           className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm"
         />
 
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
           <FilterGroup label="Littérature" options={LITERATURE_OPTIONS} value={literature} onChange={setLiterature} labels={LITERATURE_LABELS} />
           <FilterGroup label="Genre" options={THEME_OPTIONS} value={theme} onChange={setTheme} labels={THEME_LABELS} />
+          <FilterGroup label="Langue" options={LANGUAGE_OPTIONS} value={language} onChange={setLanguage} labels={LANGUAGE_LABELS} />
           <FilterGroup label="Mood" options={MOOD_OPTIONS} value={mood} onChange={setMood} />
           <FilterGroup label="Rythme" options={PACE_OPTIONS} value={pace} onChange={setPace} />
         </div>

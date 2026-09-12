@@ -64,6 +64,7 @@ export const api = {
     genre?: string;
     literature?: string;
     theme?: string;
+    language?: string;
   }) => {
     const qs = new URLSearchParams(
       Object.fromEntries(Object.entries(params).filter(([, v]) => v))
