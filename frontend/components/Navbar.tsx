@@ -33,10 +33,10 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm ${
+                className={`flex items-center border-b-2 pb-[13px] pt-[13px] text-sm ${
                   pathname.startsWith(link.href)
-                    ? "-mb-[1px] border-b-2 border-accent pb-4 font-semibold text-accent"
-                    : "text-ink-muted hover:text-ink"
+                    ? "border-accent font-semibold text-accent"
+                    : "border-transparent text-ink-muted hover:text-ink"
                 }`}
               >
                 {link.label}
