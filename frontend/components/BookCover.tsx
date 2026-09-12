@@ -26,7 +26,7 @@ export function BookCover({
   }
   return (
     <div
-      className={`flex items-center justify-center bg-neutral-200 p-2 text-center text-xs text-neutral-500 ${className}`}
+      className={`flex items-center justify-center bg-[#efe2d2] p-3 text-center font-serif text-sm font-semibold text-ink-soft ${className}`}
     >
       {title}
     </div>

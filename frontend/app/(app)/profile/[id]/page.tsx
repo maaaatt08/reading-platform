@@ -42,18 +42,18 @@ export default function ProfilePage() {
     }
   }
 
-  if (loading) return <p className="text-sm text-neutral-500">Chargement...</p>;
-  if (!profile) return <p className="text-sm text-neutral-500">Utilisateur introuvable.</p>;
+  if (loading) return <p className="text-sm text-ink-muted">Chargement...</p>;
+  if (!profile) return <p className="text-sm text-ink-muted">Utilisateur introuvable.</p>;
 
   const isMe = me?.id === profile.id;
 
   return (
     <div className="space-y-6">
-      <div className="flex items-start justify-between rounded-lg border border-neutral-200 bg-white p-6">
+      <div className="flex items-start justify-between rounded-[10px] border border-border-warm bg-surface p-6">
         <div>
-          <h1 className="text-2xl font-semibold">{profile.username}</h1>
-          {profile.bio && <p className="mt-1 text-sm text-neutral-600">{profile.bio}</p>}
-          <div className="mt-3 flex gap-4 text-sm text-neutral-500">
+          <h1 className="font-serif text-2xl font-semibold">{profile.username}</h1>
+          {profile.bio && <p className="mt-1 text-sm text-ink-muted">{profile.bio}</p>}
+          <div className="mt-3 flex gap-4 text-sm text-ink-soft">
             <span>{profile.books_read_count} livres lus</span>
             <span>{profile.followers_count} abonnés</span>
             <span>{profile.following_count} abonnements</span>
@@ -63,10 +63,10 @@ export default function ProfilePage() {
           <button
             onClick={toggleFollow}
             disabled={followBusy}
-            className={`rounded-md border px-4 py-2 text-sm disabled:opacity-50 ${
+            className={`rounded-full border px-4 py-2 text-sm font-semibold transition disabled:opacity-50 ${
               profile.is_followed_by_me
-                ? "border-neutral-300 text-neutral-600 hover:bg-neutral-100"
-                : "border-neutral-900 bg-neutral-900 text-white hover:bg-neutral-700"
+                ? "border-border-warm text-ink-muted hover:bg-card"
+                : "border-accent bg-accent text-card hover:bg-accent-dark"
             }`}
           >
             {profile.is_followed_by_me ? "Suivi(e)" : "Suivre"}
@@ -75,11 +75,11 @@ export default function ProfilePage() {
       </div>
 
       <div className="space-y-3">
-        <h2 className="text-lg font-semibold">Livres lus</h2>
+        <h2 className="font-serif text-lg font-semibold">Livres lus</h2>
         {books.length === 0 ? (
-          <p className="text-sm text-neutral-500">Aucun livre marqué comme lu.</p>
+          <p className="text-sm text-ink-muted">Aucun livre marqué comme lu.</p>
         ) : (
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+          <div className="grid grid-cols-2 gap-x-5 gap-y-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {books.map((b) => (
               <BookCard
                 key={b.book_id}
@@ -89,7 +89,7 @@ export default function ProfilePage() {
                 coverUrl={b.cover_url}
                 footer={
                   b.rating != null && (
-                    <p className="text-xs text-amber-600">{"★".repeat(Math.round(b.rating))}</p>
+                    <p className="mt-1 text-[11px] tracking-wide text-star">{"★".repeat(Math.round(b.rating))}</p>
                   )
                 }
               />

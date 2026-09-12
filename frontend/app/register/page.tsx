@@ -5,6 +5,7 @@ import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/auth-context";
 import { ApiError } from "@/lib/api";
+import { Button } from "@/components/Button";
 
 export default function RegisterPage() {
   const { register } = useAuth();
@@ -30,14 +31,14 @@ export default function RegisterPage() {
   }
 
   return (
-    <main className="flex flex-1 items-center justify-center px-4">
+    <main className="flex flex-1 items-center justify-center bg-cream px-4">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-sm space-y-4 rounded-xl border border-neutral-200 bg-white p-8 shadow-sm"
+        className="w-full max-w-sm space-y-4 rounded-xl border border-border-warm bg-surface p-8 shadow-sm"
       >
         <div>
-          <h1 className="text-xl font-semibold">Créer un compte</h1>
-          <p className="mt-1 text-sm text-neutral-500">
+          <h1 className="font-serif text-2xl font-semibold text-ink">Créer un compte</h1>
+          <p className="mt-1 text-sm text-ink-muted">
             Rejoins la communauté pour suivre tes lectures.
           </p>
         </div>
@@ -47,7 +48,7 @@ export default function RegisterPage() {
         )}
 
         <div className="space-y-1">
-          <label className="text-sm font-medium" htmlFor="username">
+          <label className="text-sm font-medium text-ink" htmlFor="username">
             Nom d&apos;utilisateur
           </label>
           <input
@@ -55,12 +56,12 @@ export default function RegisterPage() {
             required
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-neutral-500"
+            className="w-full rounded-md border border-border-warm bg-card px-3 py-2 text-sm text-ink outline-none focus:border-accent"
           />
         </div>
 
         <div className="space-y-1">
-          <label className="text-sm font-medium" htmlFor="email">
+          <label className="text-sm font-medium text-ink" htmlFor="email">
             Email
           </label>
           <input
@@ -69,12 +70,12 @@ export default function RegisterPage() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-neutral-500"
+            className="w-full rounded-md border border-border-warm bg-card px-3 py-2 text-sm text-ink outline-none focus:border-accent"
           />
         </div>
 
         <div className="space-y-1">
-          <label className="text-sm font-medium" htmlFor="password">
+          <label className="text-sm font-medium text-ink" htmlFor="password">
             Mot de passe
           </label>
           <input
@@ -84,21 +85,17 @@ export default function RegisterPage() {
             minLength={6}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-neutral-500"
+            className="w-full rounded-md border border-border-warm bg-card px-3 py-2 text-sm text-ink outline-none focus:border-accent"
           />
         </div>
 
-        <button
-          type="submit"
-          disabled={submitting}
-          className="w-full rounded-md bg-neutral-900 px-3 py-2 text-sm font-medium text-white transition hover:bg-neutral-700 disabled:opacity-50"
-        >
+        <Button type="submit" disabled={submitting} className="w-full justify-center">
           {submitting ? "Création..." : "Créer mon compte"}
-        </button>
+        </Button>
 
-        <p className="text-center text-sm text-neutral-500">
+        <p className="text-center text-sm text-ink-muted">
           Déjà un compte ?{" "}
-          <Link href="/login" className="font-medium text-neutral-900 underline">
+          <Link href="/login" className="font-medium text-accent underline">
             Se connecter
           </Link>
         </p>

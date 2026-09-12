@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import pool from '../db/pool.js';
+import { optionalAuth } from '../middleware/auth.js';
 
 const router = Router();
 
@@ -80,8 +81,9 @@ router.get('/upcoming', async (req, res) => {
   }
 });
 
-// GET /books/:id - Détails d'un livre + ses tags + ses avis
-router.get('/:id', async (req, res) => {
+// GET /books/:id - Détails d'un livre + ses tags + ses avis + note moyenne
+// (+ "lu par tes amis" si connecté, via optionalAuth)
+router.get('/:id', optionalAuth, async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -105,10 +107,34 @@ router.get('/:id', async (req, res) => {
       [id]
     );
 
+    const ratingResult = await pool.query(
+      `SELECT ROUND(AVG(rating), 1) AS avg_rating, COUNT(rating) AS ratings_count
+       FROM user_books WHERE book_id = $1 AND rating IS NOT NULL`,
+      [id]
+    );
+
+    let friendsReading = [];
+    if (req.userId) {
+      const friendsResult = await pool.query(
+        `SELECT u.username, ub.status, ub.rating
+         FROM user_books ub
+         JOIN users u ON u.id = ub.user_id
+         WHERE ub.book_id = $1
+           AND ub.user_id IN (SELECT followed_id FROM follows WHERE follower_id = $2)
+         ORDER BY ub.added_at DESC
+         LIMIT 10`,
+        [id, req.userId]
+      );
+      friendsReading = friendsResult.rows;
+    }
+
     res.json({
       ...bookResult.rows[0],
       tags: tagsResult.rows,
       reviews: reviewsResult.rows,
+      avg_rating: ratingResult.rows[0].avg_rating,
+      ratings_count: Number(ratingResult.rows[0].ratings_count),
+      friends_reading: friendsReading,
     });
   } catch (err) {
     console.error(err);

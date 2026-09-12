@@ -17,13 +17,19 @@ export function BookCard({
   return (
     <Link
       href={`/books/${id}`}
-      className="group flex flex-col overflow-hidden rounded-lg border border-neutral-200 bg-white transition hover:shadow-md"
+      className="group flex flex-col gap-2 transition duration-150 hover:-translate-y-[3px]"
     >
-      <BookCover src={coverUrl} title={title} className="h-48 w-full" />
-      <div className="flex flex-1 flex-col gap-1 p-3">
-        <p className="line-clamp-2 text-sm font-medium group-hover:underline">{title}</p>
-        {author && <p className="text-xs text-neutral-500">{author}</p>}
-        {footer && <div className="mt-auto pt-2">{footer}</div>}
+      <BookCover
+        src={coverUrl}
+        title={title}
+        className="aspect-[2/3] w-full rounded-[5px] shadow-[0_4px_10px_-4px_rgba(43,36,32,0.22)] transition-shadow duration-150 group-hover:shadow-[0_14px_22px_-8px_rgba(43,36,32,0.28)]"
+      />
+      <div>
+        <p className="line-clamp-2 font-serif text-[13px] font-semibold leading-tight text-ink group-hover:text-accent">
+          {title}
+        </p>
+        {author && <p className="mt-0.5 text-[11px] text-ink-soft">{author}</p>}
+        {footer}
       </div>
     </Link>
   );

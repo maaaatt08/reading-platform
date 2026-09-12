@@ -14,7 +14,9 @@ import {
 } from "@/lib/constants";
 import type { Book } from "@/lib/types";
 import { BookCard } from "@/components/BookCard";
-import { FilterGroup } from "@/components/FilterGroup";
+import { FilterChip } from "@/components/FilterChip";
+import { Button } from "@/components/Button";
+import { GlobeIcon, TagIcon, ChatIcon, SparkleIcon, PulseIcon, SearchIcon } from "@/components/icons";
 
 export default function DiscoverPage() {
   const [search, setSearch] = useState("");
@@ -41,39 +43,43 @@ export default function DiscoverPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold">Découvrir</h1>
+      <div>
+        <h1 className="font-serif text-[34px] font-semibold tracking-tight">Découvrir</h1>
+        <p className="mt-1 text-[14.5px] text-ink-muted">
+          Trouve ta prochaine lecture par littérature, genre, humeur ou rythme.
+        </p>
+      </div>
 
-      <form onSubmit={runSearch} className="space-y-4 rounded-lg border border-neutral-200 bg-white p-4">
-        <input
-          type="text"
-          placeholder="Titre ou auteur..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm"
-        />
-
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-          <FilterGroup label="Littérature" options={LITERATURE_OPTIONS} value={literature} onChange={setLiterature} labels={LITERATURE_LABELS} />
-          <FilterGroup label="Genre" options={THEME_OPTIONS} value={theme} onChange={setTheme} labels={THEME_LABELS} />
-          <FilterGroup label="Langue" options={LANGUAGE_OPTIONS} value={language} onChange={setLanguage} labels={LANGUAGE_LABELS} />
-          <FilterGroup label="Mood" options={MOOD_OPTIONS} value={mood} onChange={setMood} />
-          <FilterGroup label="Rythme" options={PACE_OPTIONS} value={pace} onChange={setPace} />
+      <form onSubmit={runSearch} className="space-y-5 rounded-[10px] border border-border-warm bg-surface p-6">
+        <div className="relative">
+          <SearchIcon className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-soft" strokeWidth={2} />
+          <input
+            type="text"
+            placeholder="Titre ou auteur..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full rounded-lg border border-border-warm bg-card py-2.5 pl-10 pr-3 text-sm text-ink placeholder:text-ink-soft"
+          />
         </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="rounded-md bg-neutral-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
-        >
+        <div className="flex flex-wrap gap-2.5">
+          <FilterChip label="Littérature" icon={<GlobeIcon className="h-[15px] w-[15px]" />} options={LITERATURE_OPTIONS} value={literature} onChange={setLiterature} labels={LITERATURE_LABELS} />
+          <FilterChip label="Genre" icon={<TagIcon className="h-[15px] w-[15px]" />} options={THEME_OPTIONS} value={theme} onChange={setTheme} labels={THEME_LABELS} />
+          <FilterChip label="Langue" icon={<ChatIcon className="h-[15px] w-[15px]" />} options={LANGUAGE_OPTIONS} value={language} onChange={setLanguage} labels={LANGUAGE_LABELS} />
+          <FilterChip label="Mood" icon={<SparkleIcon className="h-[15px] w-[15px]" />} options={MOOD_OPTIONS} value={mood} onChange={setMood} />
+          <FilterChip label="Rythme" icon={<PulseIcon className="h-[15px] w-[15px]" />} options={PACE_OPTIONS} value={pace} onChange={setPace} />
+        </div>
+
+        <Button type="submit" disabled={loading} icon={<SearchIcon className="h-[15px] w-[15px]" strokeWidth={2.2} />}>
           {loading ? "Recherche..." : "Rechercher"}
-        </button>
+        </Button>
       </form>
 
       {searched && !loading && books.length === 0 && (
-        <p className="text-sm text-neutral-500">Aucun livre ne correspond à ces critères.</p>
+        <p className="text-sm text-ink-muted">Aucun livre ne correspond à ces critères.</p>
       )}
 
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <div className="grid grid-cols-2 gap-x-5 gap-y-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
         {books.map((book) => (
           <BookCard
             key={book.id}

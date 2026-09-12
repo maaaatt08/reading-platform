@@ -39,7 +39,15 @@ export type Review = {
   username: string;
 };
 
-export type BookDetail = Book & { tags: BookTag[]; reviews: Review[] };
+export type FriendReading = { username: string; status: Status; rating: number | null };
+
+export type BookDetail = Book & {
+  tags: BookTag[];
+  reviews: Review[];
+  avg_rating: string | null;
+  ratings_count: number;
+  friends_reading: FriendReading[];
+};
 
 export type UserBook = {
   id: number;

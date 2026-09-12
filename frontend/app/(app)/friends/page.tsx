@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useAuth } from "@/lib/auth-context";
 import { api } from "@/lib/api";
 import type { UserSearchResult } from "@/lib/types";
+import { Button } from "@/components/Button";
+import { SearchIcon } from "@/components/icons";
 
 export default function FriendsPage() {
   const { token } = useAuth();
@@ -44,7 +46,7 @@ export default function FriendsPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold">Trouver des amis</h1>
+      <h1 className="font-serif text-[34px] font-semibold tracking-tight">Trouver des amis</h1>
 
       <form onSubmit={runSearch} className="flex gap-2">
         <input
@@ -52,36 +54,32 @@ export default function FriendsPage() {
           placeholder="Nom d'utilisateur..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="w-full max-w-sm rounded-md border border-neutral-300 px-3 py-2 text-sm"
+          className="w-full max-w-sm rounded-md border border-border-warm bg-card px-3 py-2 text-sm text-ink"
         />
-        <button
-          type="submit"
-          disabled={loading}
-          className="rounded-md bg-neutral-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
-        >
+        <Button type="submit" disabled={loading} icon={<SearchIcon className="h-[15px] w-[15px]" strokeWidth={2.2} />}>
           {loading ? "..." : "Chercher"}
-        </button>
+        </Button>
       </form>
 
       {searched && !loading && results.length === 0 && (
-        <p className="text-sm text-neutral-500">Aucun utilisateur trouvé.</p>
+        <p className="text-sm text-ink-muted">Aucun utilisateur trouvé.</p>
       )}
 
       <ul className="space-y-2">
         {results.map((u) => (
           <li
             key={u.id}
-            className="flex items-center justify-between rounded-lg border border-neutral-200 bg-white p-3"
+            className="flex items-center justify-between rounded-[10px] border border-border-warm bg-surface p-3"
           >
-            <Link href={`/profile/${u.id}`} className="text-sm font-medium hover:underline">
+            <Link href={`/profile/${u.id}`} className="text-sm font-semibold hover:text-accent">
               {u.username}
             </Link>
             <button
               onClick={() => toggleFollow(u.id)}
-              className={`rounded-md border px-3 py-1.5 text-sm ${
+              className={`rounded-full border px-3.5 py-1.5 text-sm font-semibold transition ${
                 followed.has(u.id)
-                  ? "border-neutral-300 text-neutral-600 hover:bg-neutral-100"
-                  : "border-neutral-900 bg-neutral-900 text-white hover:bg-neutral-700"
+                  ? "border-border-warm text-ink-muted hover:bg-card"
+                  : "border-accent bg-accent text-card hover:bg-accent-dark"
               }`}
             >
               {followed.has(u.id) ? "Suivi(e)" : "Suivre"}

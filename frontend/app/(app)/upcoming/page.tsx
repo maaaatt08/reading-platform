@@ -23,16 +23,16 @@ export default function UpcomingPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold">Prochaines sorties</h1>
+      <h1 className="font-serif text-[34px] font-semibold tracking-tight">Prochaines sorties</h1>
 
       {loading ? (
-        <p className="text-sm text-neutral-500">Chargement...</p>
+        <p className="text-sm text-ink-muted">Chargement...</p>
       ) : books.length === 0 ? (
-        <p className="text-sm text-neutral-500">
+        <p className="text-sm text-ink-muted">
           Aucune sortie à venir n&apos;est renseignée pour le moment.
         </p>
       ) : (
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+        <div className="grid grid-cols-2 gap-x-5 gap-y-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {books.map((book) => (
             <BookCard
               key={book.id}
@@ -42,7 +42,7 @@ export default function UpcomingPage() {
               coverUrl={book.cover_url}
               footer={
                 book.release_date && (
-                  <p className="text-xs text-neutral-500">{formatDate(book.release_date)}</p>
+                  <p className="mt-1 text-[11px] text-ink-soft">{formatDate(book.release_date)}</p>
                 )
               }
             />

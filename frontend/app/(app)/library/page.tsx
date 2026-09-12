@@ -7,6 +7,7 @@ import { api } from "@/lib/api";
 import type { Status, UserBook } from "@/lib/types";
 import { STATUS_LABELS, STATUS_OPTIONS } from "@/lib/constants";
 import { BookCover } from "@/components/BookCover";
+import { BookmarkIcon, ChevronDownIcon } from "@/components/icons";
 
 export default function LibraryPage() {
   const { token } = useAuth();
@@ -41,8 +42,8 @@ export default function LibraryPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">Ma bibliothèque</h1>
-        <Link href="/discover" className="text-sm text-neutral-600 underline">
+        <h1 className="font-serif text-[34px] font-semibold tracking-tight">Ma bibliothèque</h1>
+        <Link href="/discover" className="text-sm text-accent underline">
           Chercher un livre à ajouter
         </Link>
       </div>
@@ -52,10 +53,10 @@ export default function LibraryPage() {
           <button
             key={s}
             onClick={() => setFilter(s)}
-            className={`rounded-full border px-3 py-1 text-sm ${
+            className={`rounded-full border px-4 py-2 text-[13.5px] font-semibold transition ${
               filter === s
-                ? "border-neutral-900 bg-neutral-900 text-white"
-                : "border-neutral-300 text-neutral-600 hover:bg-neutral-100"
+                ? "border-accent bg-accent text-card"
+                : "border-border-warm bg-surface text-ink-muted hover:bg-card"
             }`}
           >
             {s === "all" ? "Tous" : STATUS_LABELS[s]}
@@ -64,37 +65,49 @@ export default function LibraryPage() {
       </div>
 
       {loading ? (
-        <p className="text-sm text-neutral-500">Chargement...</p>
+        <p className="text-sm text-ink-muted">Chargement...</p>
       ) : books.length === 0 ? (
-        <p className="text-sm text-neutral-500">
+        <p className="text-sm text-ink-muted">
           Aucun livre ici pour l&apos;instant. Va sur{" "}
-          <Link href="/discover" className="underline">
+          <Link href="/discover" className="text-accent underline">
             Découvrir
           </Link>{" "}
           pour en ajouter.
         </p>
       ) : (
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+        <div className="grid grid-cols-2 gap-x-5 gap-y-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {books.map((book) => (
-            <div
-              key={book.id}
-              className="flex flex-col overflow-hidden rounded-lg border border-neutral-200 bg-white"
-            >
+            <div key={book.id} className="flex flex-col gap-2">
               <Link href={`/books/${book.book_id}`}>
-                <BookCover src={book.cover_url} title={book.title} className="h-40 w-full" />
+                <BookCover
+                  src={book.cover_url}
+                  title={book.title}
+                  className="aspect-[2/3] w-full rounded-[5px] shadow-[0_4px_10px_-4px_rgba(43,36,32,0.22)]"
+                />
               </Link>
-              <div className="flex flex-1 flex-col gap-2 p-3">
-                <Link href={`/books/${book.book_id}`} className="line-clamp-2 text-sm font-medium hover:underline">
+              <div>
+                <Link
+                  href={`/books/${book.book_id}`}
+                  className="line-clamp-2 font-serif text-[13px] font-semibold leading-tight text-ink hover:text-accent"
+                >
                   {book.title}
                 </Link>
-                {book.author && <p className="text-xs text-neutral-500">{book.author}</p>}
-                {book.rating != null && (
-                  <p className="text-xs text-amber-600">{"★".repeat(Math.round(book.rating))}</p>
-                )}
+                {book.author && <p className="mt-0.5 text-[11px] text-ink-soft">{book.author}</p>}
+              </div>
+              {book.rating != null && (
+                <p className="text-[13px] tracking-wide text-star">{"★".repeat(Math.round(book.rating))}</p>
+              )}
+              <div className="relative flex items-center justify-between gap-1.5 rounded-full border border-border-warm bg-card px-2.5 py-1.5 transition hover:border-[#c7996e] hover:bg-surface">
+                <span className="flex items-center gap-1.5 text-xs text-ink-muted">
+                  <BookmarkIcon className="h-3 w-3 text-ink-soft" strokeWidth={2} />
+                  {STATUS_LABELS[book.status]}
+                </span>
+                <ChevronDownIcon className="h-[5px] w-2 text-ink-soft" />
                 <select
                   value={book.status}
                   onChange={(e) => updateStatus(book, e.target.value as Status)}
-                  className="mt-auto rounded-md border border-neutral-300 px-2 py-1 text-xs"
+                  aria-label="Statut"
+                  className="absolute inset-0 w-full cursor-pointer opacity-0"
                 >
                   {STATUS_OPTIONS.map((s) => (
                     <option key={s} value={s}>

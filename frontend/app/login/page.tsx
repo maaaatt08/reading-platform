@@ -5,6 +5,7 @@ import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/auth-context";
 import { ApiError } from "@/lib/api";
+import { Button } from "@/components/Button";
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -29,14 +30,14 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="flex flex-1 items-center justify-center px-4">
+    <main className="flex flex-1 items-center justify-center bg-cream px-4">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-sm space-y-4 rounded-xl border border-neutral-200 bg-white p-8 shadow-sm"
+        className="w-full max-w-sm space-y-4 rounded-xl border border-border-warm bg-surface p-8 shadow-sm"
       >
         <div>
-          <h1 className="text-xl font-semibold">Connexion</h1>
-          <p className="mt-1 text-sm text-neutral-500">Content de te revoir.</p>
+          <h1 className="font-serif text-2xl font-semibold text-ink">Connexion</h1>
+          <p className="mt-1 text-sm text-ink-muted">Content de te revoir.</p>
         </div>
 
         {error && (
@@ -44,7 +45,7 @@ export default function LoginPage() {
         )}
 
         <div className="space-y-1">
-          <label className="text-sm font-medium" htmlFor="email">
+          <label className="text-sm font-medium text-ink" htmlFor="email">
             Email
           </label>
           <input
@@ -53,12 +54,12 @@ export default function LoginPage() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-neutral-500"
+            className="w-full rounded-md border border-border-warm bg-card px-3 py-2 text-sm text-ink outline-none focus:border-accent"
           />
         </div>
 
         <div className="space-y-1">
-          <label className="text-sm font-medium" htmlFor="password">
+          <label className="text-sm font-medium text-ink" htmlFor="password">
             Mot de passe
           </label>
           <input
@@ -67,21 +68,17 @@ export default function LoginPage() {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-neutral-500"
+            className="w-full rounded-md border border-border-warm bg-card px-3 py-2 text-sm text-ink outline-none focus:border-accent"
           />
         </div>
 
-        <button
-          type="submit"
-          disabled={submitting}
-          className="w-full rounded-md bg-neutral-900 px-3 py-2 text-sm font-medium text-white transition hover:bg-neutral-700 disabled:opacity-50"
-        >
+        <Button type="submit" disabled={submitting} className="w-full justify-center">
           {submitting ? "Connexion..." : "Se connecter"}
-        </button>
+        </Button>
 
-        <p className="text-center text-sm text-neutral-500">
+        <p className="text-center text-sm text-ink-muted">
           Pas encore de compte ?{" "}
-          <Link href="/register" className="font-medium text-neutral-900 underline">
+          <Link href="/register" className="font-medium text-accent underline">
             S&apos;inscrire
           </Link>
         </p>

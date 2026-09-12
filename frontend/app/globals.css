@@ -3,6 +3,19 @@
 @theme inline {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-source-serif), Georgia, "Times New Roman", serif;
+
+  --color-cream: #f5eee0;
+  --color-surface: #f9f2e6;
+  --color-card: #fffdf8;
+  --color-ink: #2b2420;
+  --color-ink-muted: #6b6157;
+  --color-ink-soft: #8a7f70;
+  --color-accent: #b5542e;
+  --color-accent-dark: #8f4123;
+  --color-accent-tint: #f3e3d3;
+  --color-border-warm: #e4d9c8;
+  --color-star: #c99a3a;
 }
 
 body {
