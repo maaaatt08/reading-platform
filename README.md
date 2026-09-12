@@ -20,10 +20,13 @@ reading-platform/
 │   ├── scripts/
 │   │   ├── import-books.js         # Import de livres depuis l'API Google Books
 │   │   ├── import-nyt-bestsellers.js  # Import des listes de bestsellers du New York Times
-│   │   ├── tag-book.js             # Ajout/retrait manuel d'un tag mood/pace/genre
+│   │   ├── backfill-tags.js        # Pose les tags literature/theme sur les livres déjà importés
+│   │   ├── tag-book.js             # Ajout/retrait manuel d'un tag mood/pace/genre/literature/theme
 │   │   ├── googleBooks.js          # Client Google Books (recherche + normalisation)
 │   │   ├── nytBooks.js             # Client NYT Books API (listes de bestsellers)
 │   │   ├── tagHeuristics.js        # Devine des tags mood/pace par mots-clés
+│   │   ├── literatureMap.js        # Devine la tradition littéraire (française, russe...) par auteur
+│   │   ├── themeHeuristics.js      # Devine le thème/genre (roman, policier, essai...) par catégorie+mots-clés
 │   │   └── seedQueries.js          # Requêtes par défaut pour peupler la base (par vagues)
 │   ├── package.json
 │   └── .env.example
@@ -31,7 +34,8 @@ reading-platform/
 │   ├── app/                    # Pages (login, register, library, discover, upcoming, feed, friends, profile, books)
 │   └── lib/                    # Client API, contexte d'auth, types
 └── database/
-    └── schema.sql              # Schéma complet de la base de données
+    ├── schema.sql               # Schéma complet de la base de données
+    └── migrations/               # Modifications de schéma postérieures à la mise en place initiale
 ```
 
 ## Installation pas à pas
@@ -120,6 +124,16 @@ npm run import-nyt
 ```
 Le script récupère toutes les listes NYT courantes (fiction, non-fiction, young adult, business, manga, etc.), et enrichit chaque livre via Google Books quand une correspondance ISBN existe (couverture/description/genre plus complets), avec repli sur les données NYT sinon. L'API NYT limite à 5 requêtes/minute en accès gratuit : l'import complet prend une dizaine de minutes.
 
+## Filtres Découvrir : littérature et genre
+En plus de mood/pace, chaque livre reçoit deux tags supplémentaires posés automatiquement à l'import :
+- **literature** : tradition géographique/linguistique (française, russe, anglaise, américaine, japonaise...) — devinée à partir de l'auteur (`scripts/literatureMap.js`)
+- **theme** : genre littéraire courant (roman, policier, fantasy, essai, bd-manga, jeunesse...) — deviné à partir de la catégorie Google Books et de mots-clés (`scripts/themeHeuristics.js`)
+
+Ces deux tags sont posés automatiquement par `import-books.js` et `import-nyt-bestsellers.js`. Pour les appliquer rétroactivement à des livres déjà en base (ex: après une migration ou un import fait avant l'ajout de cette fonctionnalité) :
+```bash
+npm run backfill-tags
+```
+
 ## Ce qui reste à faire
-- Relire/corriger les tags mood/pace posés automatiquement (heuristique par mots-clés, pas parfaite)
+- Relire/corriger les tags posés automatiquement (heuristiques par mots-clés/auteur, pas parfaites)
 - Déploiement (backend + frontend) au-delà du développement local

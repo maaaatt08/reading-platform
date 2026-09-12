@@ -57,7 +57,14 @@ export const api = {
 
   me: (token: string) => request<User>("/auth/me", {}, token),
 
-  searchBooks: (params: { search?: string; mood?: string; pace?: string; genre?: string }) => {
+  searchBooks: (params: {
+    search?: string;
+    mood?: string;
+    pace?: string;
+    genre?: string;
+    literature?: string;
+    theme?: string;
+  }) => {
     const qs = new URLSearchParams(
       Object.fromEntries(Object.entries(params).filter(([, v]) => v))
     ).toString();

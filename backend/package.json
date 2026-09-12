@@ -9,6 +9,7 @@
     "dev": "node --watch src/server.js",
     "import-books": "node scripts/import-books.js",
     "import-nyt": "node scripts/import-nyt-bestsellers.js",
+    "backfill-tags": "node scripts/backfill-tags.js",
     "tag-book": "node scripts/tag-book.js"
   },
   "dependencies": {

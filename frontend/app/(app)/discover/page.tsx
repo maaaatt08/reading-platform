@@ -2,14 +2,24 @@
 
 import { useState, type FormEvent } from "react";
 import { api } from "@/lib/api";
-import { MOOD_OPTIONS, PACE_OPTIONS } from "@/lib/constants";
+import {
+  MOOD_OPTIONS,
+  PACE_OPTIONS,
+  LITERATURE_OPTIONS,
+  LITERATURE_LABELS,
+  THEME_OPTIONS,
+  THEME_LABELS,
+} from "@/lib/constants";
 import type { Book } from "@/lib/types";
 import { BookCard } from "@/components/BookCard";
+import { FilterGroup } from "@/components/FilterGroup";
 
 export default function DiscoverPage() {
   const [search, setSearch] = useState("");
   const [mood, setMood] = useState("");
   const [pace, setPace] = useState("");
+  const [literature, setLiterature] = useState("");
+  const [theme, setTheme] = useState("");
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
@@ -18,7 +28,7 @@ export default function DiscoverPage() {
     e?.preventDefault();
     setLoading(true);
     try {
-      const results = await api.searchBooks({ search, mood, pace });
+      const results = await api.searchBooks({ search, mood, pace, literature, theme });
       setBooks(results);
     } finally {
       setLoading(false);
@@ -40,45 +50,10 @@ export default function DiscoverPage() {
         />
 
         <div className="flex flex-wrap gap-4">
-          <div className="space-y-1">
-            <p className="text-xs font-medium text-neutral-500">Mood</p>
-            <div className="flex flex-wrap gap-1">
-              {MOOD_OPTIONS.map((m) => (
-                <button
-                  type="button"
-                  key={m}
-                  onClick={() => setMood(mood === m ? "" : m)}
-                  className={`rounded-full border px-2.5 py-1 text-xs ${
-                    mood === m
-                      ? "border-neutral-900 bg-neutral-900 text-white"
-                      : "border-neutral-300 text-neutral-600 hover:bg-neutral-100"
-                  }`}
-                >
-                  {m}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="space-y-1">
-            <p className="text-xs font-medium text-neutral-500">Rythme</p>
-            <div className="flex flex-wrap gap-1">
-              {PACE_OPTIONS.map((p) => (
-                <button
-                  type="button"
-                  key={p}
-                  onClick={() => setPace(pace === p ? "" : p)}
-                  className={`rounded-full border px-2.5 py-1 text-xs ${
-                    pace === p
-                      ? "border-neutral-900 bg-neutral-900 text-white"
-                      : "border-neutral-300 text-neutral-600 hover:bg-neutral-100"
-                  }`}
-                >
-                  {p}
-                </button>
-              ))}
-            </div>
-          </div>
+          <FilterGroup label="Littérature" options={LITERATURE_OPTIONS} value={literature} onChange={setLiterature} labels={LITERATURE_LABELS} />
+          <FilterGroup label="Genre" options={THEME_OPTIONS} value={theme} onChange={setTheme} labels={THEME_LABELS} />
+          <FilterGroup label="Mood" options={MOOD_OPTIONS} value={mood} onChange={setMood} />
+          <FilterGroup label="Rythme" options={PACE_OPTIONS} value={pace} onChange={setPace} />
         </div>
 
         <button

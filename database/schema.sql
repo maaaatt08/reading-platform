@@ -24,11 +24,13 @@ CREATE TABLE books (
     created_at TIMESTAMP DEFAULT NOW()
 );
 
--- Tags mood/pace assignés aux livres (ex: "dark", "fast-paced")
+-- Tags assignés aux livres : mood/pace (ex: "dark", "fast-paced"), genre brut
+-- (catégorie Google Books), literature (origine géo/linguistique : "française",
+-- "russe"...) et theme (genre littéraire courant : "roman", "policier"...)
 CREATE TABLE book_tags (
     id SERIAL PRIMARY KEY,
     book_id INTEGER REFERENCES books(id) ON DELETE CASCADE,
-    tag_type VARCHAR(20) NOT NULL CHECK (tag_type IN ('mood', 'pace', 'genre')),
+    tag_type VARCHAR(20) NOT NULL CHECK (tag_type IN ('mood', 'pace', 'genre', 'literature', 'theme')),
     tag_value VARCHAR(50) NOT NULL,
     UNIQUE(book_id, tag_type, tag_value)
 );

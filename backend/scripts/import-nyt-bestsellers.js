@@ -13,6 +13,8 @@ import pool from "../src/db/pool.js";
 import { fetchListNames, fetchCurrentList } from "./nytBooks.js";
 import { searchGoogleBooks } from "./googleBooks.js";
 import { inferTags } from "./tagHeuristics.js";
+import { inferLiterature } from "./literatureMap.js";
+import { inferTheme } from "./themeHeuristics.js";
 
 async function upsertBook(book) {
   const result = await pool.query(
@@ -33,10 +35,14 @@ async function upsertBook(book) {
 
 async function applyTags(bookId, book) {
   const { moods, pace } = inferTags(book);
+  const literature = inferLiterature(book.author);
+  const theme = inferTheme(book);
   const tags = [
     ...moods.map((value) => ["mood", value]),
     ["pace", pace],
     ...(book.genre ? [["genre", book.genre]] : []),
+    ...(literature ? [["literature", literature]] : []),
+    ...(theme ? [["theme", theme]] : []),
   ];
   for (const [tag_type, tag_value] of tags) {
     await pool.query(
