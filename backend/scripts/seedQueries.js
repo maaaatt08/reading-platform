@@ -504,3 +504,33 @@ export const POLITICS_QUERIES = [
   "subject:political science",
   "subject:géopolitique",
 ];
+
+// Dixième vague : trous précis signalés par l'utilisateur (De Gaulle, Sarah Knafo) +
+// élargissement à beaucoup plus de figures politiques françaises actuelles, tous bords —
+// "inauthor:Édouard Philippe" existait déjà mais était noyé sous des homonymes (un
+// historien ottoman du XIXe siècle portant le même nom), d'où l'impression de manque.
+export const POLITICS_QUERIES_2 = [
+  // Charles de Gaulle : biographies (titre plutôt qu'auteur, pour capter large)
+  "intitle:de gaulle",
+  'inauthor:"Éric Roussel" de gaulle',
+  'inauthor:"Jean Lacouture" de gaulle',
+  'inauthor:"Julian Jackson" de gaulle',
+  'inauthor:"Michel Winock"',
+  // Signalé par l'utilisateur
+  'inauthor:"Sarah Knafo"',
+  // Figures politiques françaises actuelles, tous bords
+  'inauthor:"Marine Le Pen"',
+  'inauthor:"Jordan Bardella"',
+  'inauthor:"Gabriel Attal"',
+  'inauthor:"Bruno Le Maire"',
+  'inauthor:"François Bayrou"',
+  'inauthor:"Anne Hidalgo"',
+  'inauthor:"Fabien Roussel"',
+  'inauthor:"Gérald Darmanin"',
+  'inauthor:"Rachida Dati"',
+  'inauthor:"Manuel Valls"',
+  'inauthor:"Ségolène Royal"',
+  'inauthor:"Michel Barnier"',
+  'inauthor:"Marion Maréchal"',
+  'inauthor:"François Ruffin"',
+];

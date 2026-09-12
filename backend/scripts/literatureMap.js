@@ -50,6 +50,12 @@ const AUTHOR_LITERATURE = {
     "Emmanuel Todd", "Alain Duhamel", "Éric Zemmour", "Jean-Luc Mélenchon",
     "Raphaël Glucksmann", "Alain Finkielkraut", "Régis Debray", "Dominique de Villepin",
     "Nicolas Sarkozy", "François Hollande", "Édouard Philippe", "Alexis de Tocqueville",
+    // Politique française (vague 10) + biographes de De Gaulle
+    "Éric Roussel", "Jean Lacouture", "Michel Winock", "Sarah Knafo",
+    "Marine Le Pen", "Jordan Bardella", "Gabriel Attal", "Bruno Le Maire",
+    "François Bayrou", "Anne Hidalgo", "Fabien Roussel", "Gérald Darmanin",
+    "Rachida Dati", "Manuel Valls", "Ségolène Royal", "Michel Barnier",
+    "Marion Maréchal", "François Ruffin",
   ],
   russe: [
     "Anton Chekhov", "Nikolai Gogol", "Alexander Pushkin", "Ivan Turgenev",
@@ -61,7 +67,7 @@ const AUTHOR_LITERATURE = {
     "George Orwell", "Aldous Huxley", "Lewis Carroll", "C.S. Lewis", "A.A. Milne",
     "Roald Dahl", "Agatha Christie", "Richard Osman", "Anthony Horowitz", "Ian Rankin",
     "Val McDermid", "Paula Hawkins", "Neil Gaiman", "Kazuo Ishiguro", "Lee Child",
-    "John Locke", "John Stuart Mill",
+    "John Locke", "John Stuart Mill", "Julian Jackson",
   ],
   americaine: [
     "Mark Twain", "Ernest Hemingway", "Toni Morrison", "F. Scott Fitzgerald",

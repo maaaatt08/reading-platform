@@ -14,6 +14,7 @@
 //   node scripts/import-books.js --nonfiction               -> importe histoire/philosophie/biographie/business/science (NONFICTION_QUERIES)
 //   node scripts/import-books.js --french-nonfiction         -> business/dev perso/histoire/sciences/SF en français (FRENCH_NONFICTION_QUERIES)
 //   node scripts/import-books.js --politics                 -> livres de politique, France + international (POLITICS_QUERIES)
+//   node scripts/import-books.js --politics2                -> De Gaulle, Sarah Knafo + figures politiques actuelles (POLITICS_QUERIES_2)
 
 import pool from "../src/db/pool.js";
 import { searchGoogleBooks } from "./googleBooks.js";
@@ -30,6 +31,7 @@ import {
   NONFICTION_QUERIES,
   FRENCH_NONFICTION_QUERIES,
   POLITICS_QUERIES,
+  POLITICS_QUERIES_2,
 } from "./seedQueries.js";
 
 const WAVE_FLAGS = {
@@ -41,6 +43,7 @@ const WAVE_FLAGS = {
   "--nonfiction": NONFICTION_QUERIES,
   "--french-nonfiction": FRENCH_NONFICTION_QUERIES,
   "--politics": POLITICS_QUERIES,
+  "--politics2": POLITICS_QUERIES_2,
 };
 
 const args = process.argv.slice(2);
