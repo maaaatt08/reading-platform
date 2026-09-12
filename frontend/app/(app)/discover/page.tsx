@@ -49,7 +49,7 @@ export default function DiscoverPage() {
           className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm"
         />
 
-        <div className="flex flex-wrap gap-4">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           <FilterGroup label="Littérature" options={LITERATURE_OPTIONS} value={literature} onChange={setLiterature} labels={LITERATURE_LABELS} />
           <FilterGroup label="Genre" options={THEME_OPTIONS} value={theme} onChange={setTheme} labels={THEME_LABELS} />
           <FilterGroup label="Mood" options={MOOD_OPTIONS} value={mood} onChange={setMood} />

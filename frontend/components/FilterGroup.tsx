@@ -12,24 +12,20 @@ export function FilterGroup({
   labels?: Record<string, string>;
 }) {
   return (
-    <div className="space-y-1">
-      <p className="text-xs font-medium text-neutral-500">{label}</p>
-      <div className="flex flex-wrap gap-1">
+    <label className="flex flex-col gap-1">
+      <span className="text-xs font-medium text-neutral-500">{label}</span>
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full rounded-md border border-neutral-300 bg-white px-2.5 py-1.5 text-sm"
+      >
+        <option value="">Tous</option>
         {options.map((opt) => (
-          <button
-            type="button"
-            key={opt}
-            onClick={() => onChange(value === opt ? "" : opt)}
-            className={`rounded-full border px-2.5 py-1 text-xs ${
-              value === opt
-                ? "border-neutral-900 bg-neutral-900 text-white"
-                : "border-neutral-300 text-neutral-600 hover:bg-neutral-100"
-            }`}
-          >
+          <option key={opt} value={opt}>
             {labels?.[opt] ?? opt}
-          </button>
+          </option>
         ))}
-      </div>
-    </div>
+      </select>
+    </label>
   );
 }
