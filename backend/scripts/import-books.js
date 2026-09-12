@@ -11,6 +11,7 @@
 //   node scripts/import-books.js --titles                  -> importe des titres précis très connus (TITLE_QUERIES)
 //   node scripts/import-books.js --extra                   -> importe des best-sellers contemporains supplémentaires (EXTRA_QUERIES)
 //   node scripts/import-books.js --french                  -> importe la littérature française en profondeur (FRENCH_LITERATURE_QUERIES)
+//   node scripts/import-books.js --nonfiction               -> importe histoire/philosophie/biographie/business/science (NONFICTION_QUERIES)
 
 import pool from "../src/db/pool.js";
 import { searchGoogleBooks } from "./googleBooks.js";
@@ -24,32 +25,25 @@ import {
   TITLE_QUERIES,
   EXTRA_QUERIES,
   FRENCH_LITERATURE_QUERIES,
+  NONFICTION_QUERIES,
 } from "./seedQueries.js";
+
+const WAVE_FLAGS = {
+  "--more": MORE_QUERIES,
+  "--classics": CLASSICS_QUERIES,
+  "--titles": TITLE_QUERIES,
+  "--extra": EXTRA_QUERIES,
+  "--french": FRENCH_LITERATURE_QUERIES,
+  "--nonfiction": NONFICTION_QUERIES,
+};
 
 const args = process.argv.slice(2);
 const maxArg = args.find((a) => a.startsWith("--max="));
 const maxResults = maxArg ? parseInt(maxArg.split("=")[1], 10) : 20;
 const shouldTag = !args.includes("--no-tags");
-const useMore = args.includes("--more");
-const useClassics = args.includes("--classics");
-const useTitles = args.includes("--titles");
-const useExtra = args.includes("--extra");
-const useFrench = args.includes("--french");
 const queries = args.filter((a) => !a.startsWith("--"));
-const queriesToRun =
-  queries.length > 0
-    ? queries
-    : useFrench
-      ? FRENCH_LITERATURE_QUERIES
-      : useExtra
-        ? EXTRA_QUERIES
-        : useTitles
-          ? TITLE_QUERIES
-          : useClassics
-            ? CLASSICS_QUERIES
-            : useMore
-              ? MORE_QUERIES
-              : SEED_QUERIES;
+const waveFlag = Object.keys(WAVE_FLAGS).find((flag) => args.includes(flag));
+const queriesToRun = queries.length > 0 ? queries : waveFlag ? WAVE_FLAGS[waveFlag] : SEED_QUERIES;
 
 async function upsertBook(book) {
   const result = await pool.query(

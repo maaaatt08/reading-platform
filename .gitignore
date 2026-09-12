@@ -24,3 +24,6 @@ yarn-error.log*
 # Éditeurs
 .vscode/
 .idea/
+
+# État interne de l'outil Claude Code (pas du contenu projet)
+.claude/scheduled_tasks.lock
