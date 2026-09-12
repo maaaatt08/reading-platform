@@ -38,6 +38,14 @@ const AUTHOR_LITERATURE = {
     "Katherine Pancol", "Éric-Emmanuel Schmitt", "Frédéric Beigbeder", "Tahar Ben Jelloun",
     "Olivier Bourdeaut", "Laurent Gounelle", "René Goscinny", "Hergé",
     "Antoine de Saint-Exupéry",
+    // Non-fiction / genre française (vague 8 : business, dev perso, histoire, sciences, SF)
+    "Thomas Piketty", "Jacques Attali", "Nicolas Bouzou", "Xavier Niel", "Marc Simoncini",
+    "Isaac Getz", "Olivier Sibony", "Jean Tirole", "Gaspard Koenig",
+    "Christophe André", "Frédéric Lenoir", "Thierry Janssen", "Ilios Kotsou",
+    "Max Gallo", "Franck Ferrand", "Lorànt Deutsch", "Jean-Christian Petitfils",
+    "Jean-Pierre Luminet", "Aurélien Barrau", "Idriss Aberkane",
+    "Pierre Bordage", "Alain Damasio", "Jean-Marc Ligny", "Catherine Dufour",
+    "Sylvain Tesson", "Cyril Lignac", "Philippe Etchebest",
   ],
   russe: [
     "Anton Chekhov", "Nikolai Gogol", "Alexander Pushkin", "Ivan Turgenev",

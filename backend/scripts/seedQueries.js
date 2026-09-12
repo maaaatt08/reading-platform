@@ -424,3 +424,45 @@ export const NONFICTION_QUERIES = [
   'inauthor:"Étienne Klein"',
   'inauthor:"Cédric Villani"',
 ];
+
+// Huitième vague : non-fiction et genres en français spécifiquement — business,
+// développement personnel, histoire, philosophie, sciences, SF étaient couverts
+// presque exclusivement par des auteurs anglophones (ex: 0 résultat pour
+// littérature=française + genre=business, signalé par l'utilisateur).
+export const FRENCH_NONFICTION_QUERIES = [
+  // Business / entrepreneuriat
+  'inauthor:"Thomas Piketty"',
+  'inauthor:"Jacques Attali"',
+  'inauthor:"Nicolas Bouzou"',
+  'inauthor:"Xavier Niel"',
+  'inauthor:"Marc Simoncini"',
+  'inauthor:"Isaac Getz"',
+  'inauthor:"Olivier Sibony"',
+  'inauthor:"Jean Tirole"',
+  'inauthor:"Gaspard Koenig"',
+  "subject:entrepreneuriat",
+  "subject:gestion d'entreprise",
+  // Développement personnel
+  'inauthor:"Christophe André"',
+  'inauthor:"Frédéric Lenoir"',
+  'inauthor:"Thierry Janssen"',
+  'inauthor:"Ilios Kotsou"',
+  // Histoire (auteurs grand public contemporains)
+  'inauthor:"Max Gallo"',
+  'inauthor:"Franck Ferrand"',
+  'inauthor:"Lorànt Deutsch"',
+  'inauthor:"Jean-Christian Petitfils"',
+  // Sciences (vulgarisation, en plus de Reeves/Klein/Villani déjà couverts)
+  'inauthor:"Jean-Pierre Luminet"',
+  'inauthor:"Aurélien Barrau"',
+  'inauthor:"Idriss Aberkane"',
+  // Science-fiction / fantasy française
+  'inauthor:"Pierre Bordage"',
+  'inauthor:"Alain Damasio"',
+  'inauthor:"Jean-Marc Ligny"',
+  'inauthor:"Catherine Dufour"',
+  // Voyage / cuisine
+  'inauthor:"Sylvain Tesson"',
+  'inauthor:"Cyril Lignac"',
+  'inauthor:"Philippe Etchebest"',
+];

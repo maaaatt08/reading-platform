@@ -12,6 +12,7 @@
 //   node scripts/import-books.js --extra                   -> importe des best-sellers contemporains supplémentaires (EXTRA_QUERIES)
 //   node scripts/import-books.js --french                  -> importe la littérature française en profondeur (FRENCH_LITERATURE_QUERIES)
 //   node scripts/import-books.js --nonfiction               -> importe histoire/philosophie/biographie/business/science (NONFICTION_QUERIES)
+//   node scripts/import-books.js --french-nonfiction         -> business/dev perso/histoire/sciences/SF en français (FRENCH_NONFICTION_QUERIES)
 
 import pool from "../src/db/pool.js";
 import { searchGoogleBooks } from "./googleBooks.js";
@@ -26,6 +27,7 @@ import {
   EXTRA_QUERIES,
   FRENCH_LITERATURE_QUERIES,
   NONFICTION_QUERIES,
+  FRENCH_NONFICTION_QUERIES,
 } from "./seedQueries.js";
 
 const WAVE_FLAGS = {
@@ -35,6 +37,7 @@ const WAVE_FLAGS = {
   "--extra": EXTRA_QUERIES,
   "--french": FRENCH_LITERATURE_QUERIES,
   "--nonfiction": NONFICTION_QUERIES,
+  "--french-nonfiction": FRENCH_NONFICTION_QUERIES,
 };
 
 const args = process.argv.slice(2);
