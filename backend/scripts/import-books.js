@@ -10,11 +10,19 @@
 //   node scripts/import-books.js --classics                -> importe les grands classiques par littérature (CLASSICS_QUERIES)
 //   node scripts/import-books.js --titles                  -> importe des titres précis très connus (TITLE_QUERIES)
 //   node scripts/import-books.js --extra                   -> importe des best-sellers contemporains supplémentaires (EXTRA_QUERIES)
+//   node scripts/import-books.js --french                  -> importe la littérature française en profondeur (FRENCH_LITERATURE_QUERIES)
 
 import pool from "../src/db/pool.js";
 import { searchGoogleBooks } from "./googleBooks.js";
 import { inferTags } from "./tagHeuristics.js";
-import { SEED_QUERIES, MORE_QUERIES, CLASSICS_QUERIES, TITLE_QUERIES, EXTRA_QUERIES } from "./seedQueries.js";
+import {
+  SEED_QUERIES,
+  MORE_QUERIES,
+  CLASSICS_QUERIES,
+  TITLE_QUERIES,
+  EXTRA_QUERIES,
+  FRENCH_LITERATURE_QUERIES,
+} from "./seedQueries.js";
 
 const args = process.argv.slice(2);
 const maxArg = args.find((a) => a.startsWith("--max="));
@@ -24,19 +32,22 @@ const useMore = args.includes("--more");
 const useClassics = args.includes("--classics");
 const useTitles = args.includes("--titles");
 const useExtra = args.includes("--extra");
+const useFrench = args.includes("--french");
 const queries = args.filter((a) => !a.startsWith("--"));
 const queriesToRun =
   queries.length > 0
     ? queries
-    : useExtra
-      ? EXTRA_QUERIES
-      : useTitles
-        ? TITLE_QUERIES
-        : useClassics
-          ? CLASSICS_QUERIES
-          : useMore
-            ? MORE_QUERIES
-            : SEED_QUERIES;
+    : useFrench
+      ? FRENCH_LITERATURE_QUERIES
+      : useExtra
+        ? EXTRA_QUERIES
+        : useTitles
+          ? TITLE_QUERIES
+          : useClassics
+            ? CLASSICS_QUERIES
+            : useMore
+              ? MORE_QUERIES
+              : SEED_QUERIES;
 
 async function upsertBook(book) {
   const result = await pool.query(

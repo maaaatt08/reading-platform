@@ -287,3 +287,68 @@ export const EXTRA_QUERIES = [
   'inauthor:"Jamie Oliver"',
   'inauthor:"Yotam Ottolenghi"',
 ];
+
+// Sixième vague : littérature française en profondeur, demandée explicitement par
+// l'utilisateur — classiques (théâtre, fables, philosophie des Lumières), romantiques
+// et poètes du XIXe, grands noms du XXe (dont les prix Nobel), best-sellers
+// contemporains, et quelques titres emblématiques en complément (intitle:+inauthor:).
+export const FRENCH_LITERATURE_QUERIES = [
+  // Classiques (XVIe-XVIIIe : théâtre, fables, philosophie)
+  'inauthor:"Molière"',
+  'inauthor:"Jean Racine"',
+  'inauthor:"Pierre Corneille"',
+  'inauthor:"Jean de La Fontaine"',
+  'inauthor:"Michel de Montaigne"',
+  'inauthor:"François Rabelais"',
+  'inauthor:"Denis Diderot"',
+  'inauthor:"Jean-Jacques Rousseau"',
+  'inauthor:"Blaise Pascal"',
+  'inauthor:"Pierre Choderlos de Laclos"',
+  // Romantisme / XIXe siècle
+  'inauthor:"Charles Baudelaire"',
+  'inauthor:"Arthur Rimbaud"',
+  'inauthor:"Paul Verlaine"',
+  'inauthor:"Guy de Maupassant"',
+  'inauthor:"George Sand"',
+  'inauthor:"Alphonse de Lamartine"',
+  'inauthor:"Alphonse Daudet"',
+  'inauthor:"Jules Verne"',
+  'inauthor:"Edmond Rostand"',
+  // XXe siècle (dont prix Nobel de littérature)
+  'inauthor:"Marguerite Yourcenar"',
+  'inauthor:"Colette"',
+  'inauthor:"André Gide"',
+  'inauthor:"André Malraux"',
+  'inauthor:"Romain Gary"',
+  'inauthor:"Boris Vian"',
+  'inauthor:"Georges Perec"',
+  'inauthor:"Patrick Modiano"',
+  'inauthor:"J.M.G. Le Clézio"',
+  'inauthor:"Annie Ernaux"',
+  'inauthor:"Michel Tournier"',
+  'inauthor:"Marcel Pagnol"',
+  // Best-sellers contemporains
+  'inauthor:"Joël Dicker"',
+  'inauthor:"Pierre Lemaitre"',
+  'inauthor:"David Foenkinos"',
+  'inauthor:"Delphine de Vigan"',
+  'inauthor:"Leïla Slimani"',
+  'inauthor:"Anna Gavalda"',
+  'inauthor:"Katherine Pancol"',
+  'inauthor:"Éric-Emmanuel Schmitt"',
+  'inauthor:"Frédéric Beigbeder"',
+  'inauthor:"Tahar Ben Jelloun"',
+  'inauthor:"Olivier Bourdeaut"',
+  'inauthor:"Laurent Gounelle"',
+  // Bande dessinée francophone
+  'inauthor:"René Goscinny"',
+  'inauthor:"Hergé"',
+  // Titres emblématiques (au cas où noyés dans les résultats "inauthor:" ci-dessus)
+  "intitle:les misérables inauthor:hugo",
+  "intitle:le comte de monte-cristo inauthor:dumas",
+  "intitle:notre-dame de paris inauthor:hugo",
+  "intitle:madame bovary inauthor:flaubert",
+  "intitle:du côté de chez swann inauthor:proust",
+  "intitle:les liaisons dangereuses inauthor:laclos",
+  "intitle:le petit prince inauthor:saint-exupéry",
+];

@@ -25,7 +25,8 @@ function normalizeVolume(volume) {
     author: truncate((info.authors || []).join(", ") || null, 255),
     cover_url: info.imageLinks?.thumbnail?.replace("http://", "https://") || null,
     description: info.description || null,
-    genre: truncate(info.categories?.[0]?.split("/")[0]?.trim() || null, 100),
+    // 50 (pas 100) car ce champ est aussi réutilisé comme book_tags.tag_value (VARCHAR(50))
+    genre: truncate(info.categories?.[0]?.split("/")[0]?.trim() || null, 50),
     release_date: normalizeDate(info.publishedDate),
   };
 }
