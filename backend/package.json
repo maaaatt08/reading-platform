@@ -1,0 +1,22 @@
+{
+  "name": "reading-platform-backend",
+  "version": "1.0.0",
+  "description": "API backend pour la plateforme de lecture",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "import-books": "node scripts/import-books.js",
+    "import-nyt": "node scripts/import-nyt-bestsellers.js",
+    "tag-book": "node scripts/tag-book.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "pg": "^8.12.0",
+    "dotenv": "^16.4.5",
+    "bcrypt": "^5.1.1",
+    "jsonwebtoken": "^9.0.2",
+    "cors": "^2.8.5"
+  }
+}
