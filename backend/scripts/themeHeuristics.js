@@ -23,6 +23,7 @@ export const THEME_OPTIONS = [
   "voyage",
   "humour",
   "true-crime",
+  "politique",
 ];
 
 // Catégorie brute Google Books (books.genre) -> thème. Comparaison insensible à la casse,
@@ -45,6 +46,7 @@ const RAW_GENRE_MAP = {
   travel: "voyage",
   humor: "humour",
   "true crime": "true-crime",
+  "political science": "politique",
 };
 
 const FICTION_KEYWORDS = {

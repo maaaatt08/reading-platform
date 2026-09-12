@@ -466,3 +466,41 @@ export const FRENCH_NONFICTION_QUERIES = [
   'inauthor:"Cyril Lignac"',
   'inauthor:"Philippe Etchebest"',
 ];
+
+// Neuvième vague : livres de politique — aucun tag "politique" n'existait avant
+// (catégorie Google "Political Science" retombait sur "essai" générique).
+// Volontairement large spectre idéologique (élus/essayistes de gauche, de droite,
+// du centre) plutôt qu'une seule tendance.
+export const POLITICS_QUERIES = [
+  // Politique française — élus et essayistes, tous bords
+  'inauthor:"Emmanuel Todd"',
+  'inauthor:"Alain Duhamel"',
+  'inauthor:"Éric Zemmour"',
+  'inauthor:"Jean-Luc Mélenchon"',
+  'inauthor:"Raphaël Glucksmann"',
+  'inauthor:"Alain Finkielkraut"',
+  'inauthor:"Régis Debray"',
+  'inauthor:"Dominique de Villepin"',
+  'inauthor:"Nicolas Sarkozy"',
+  'inauthor:"François Hollande"',
+  'inauthor:"Édouard Philippe"',
+  // Politique internationale / mémoires
+  'inauthor:"Barack Obama"',
+  'inauthor:"Michelle Obama"',
+  'inauthor:"Hillary Clinton"',
+  'inauthor:"Henry Kissinger"',
+  'inauthor:"Edward Snowden"',
+  'inauthor:"Bob Woodward"',
+  'inauthor:"Volodymyr Zelensky"',
+  // Théorie politique, classique et contemporaine
+  'inauthor:"Noam Chomsky"',
+  'inauthor:"Francis Fukuyama"',
+  'inauthor:"Alexis de Tocqueville"',
+  'inauthor:"Machiavel"',
+  'inauthor:"John Locke"',
+  'inauthor:"John Stuart Mill"',
+  // Titres emblématiques (fiction politique/dystopie)
+  "intitle:la ferme des animaux inauthor:orwell",
+  "subject:political science",
+  "subject:géopolitique",
+];

@@ -46,6 +46,10 @@ const AUTHOR_LITERATURE = {
     "Jean-Pierre Luminet", "Aurélien Barrau", "Idriss Aberkane",
     "Pierre Bordage", "Alain Damasio", "Jean-Marc Ligny", "Catherine Dufour",
     "Sylvain Tesson", "Cyril Lignac", "Philippe Etchebest",
+    // Politique française (vague 9)
+    "Emmanuel Todd", "Alain Duhamel", "Éric Zemmour", "Jean-Luc Mélenchon",
+    "Raphaël Glucksmann", "Alain Finkielkraut", "Régis Debray", "Dominique de Villepin",
+    "Nicolas Sarkozy", "François Hollande", "Édouard Philippe", "Alexis de Tocqueville",
   ],
   russe: [
     "Anton Chekhov", "Nikolai Gogol", "Alexander Pushkin", "Ivan Turgenev",
@@ -57,6 +61,7 @@ const AUTHOR_LITERATURE = {
     "George Orwell", "Aldous Huxley", "Lewis Carroll", "C.S. Lewis", "A.A. Milne",
     "Roald Dahl", "Agatha Christie", "Richard Osman", "Anthony Horowitz", "Ian Rankin",
     "Val McDermid", "Paula Hawkins", "Neil Gaiman", "Kazuo Ishiguro", "Lee Child",
+    "John Locke", "John Stuart Mill",
   ],
   americaine: [
     "Mark Twain", "Ernest Hemingway", "Toni Morrison", "F. Scott Fitzgerald",
@@ -67,13 +72,15 @@ const AUTHOR_LITERATURE = {
     "Nicholas Sparks", "Danielle Steel", "Nora Roberts", "Emily Henry", "Rebecca Yarros",
     "Dan Brown", "Sally Rooney", "Colleen Hoover", "Brandon Sanderson", "Suzanne Collins",
     "Rick Riordan", "Cassandra Clare", "Sarah J. Maas", "Leigh Bardugo",
+    "Barack Obama", "Michelle Obama", "Hillary Clinton", "Henry Kissinger",
+    "Edward Snowden", "Bob Woodward", "Noam Chomsky", "Francis Fukuyama",
   ],
   hispanophone: [
     "Gabriel García Márquez", "Isabel Allende", "Jorge Luis Borges", "Mario Vargas Llosa",
     "Pablo Neruda", "Miguel de Cervantes", "Julio Cortázar", "Paulo Coelho",
   ],
   germanique: ["Franz Kafka", "Johann Wolfgang von Goethe", "Thomas Mann", "Hermann Hesse"],
-  italienne: ["Italo Calvino", "Umberto Eco", "Elena Ferrante", "Dante Alighieri"],
+  italienne: ["Italo Calvino", "Umberto Eco", "Elena Ferrante", "Dante Alighieri", "Machiavel"],
   japonaise: [
     "Haruki Murakami", "Yukio Mishima", "Kenzaburo Oe", "Natsume Soseki",
     "Eiichiro Oda", "Akira Toriyama", "Naoki Urasawa",

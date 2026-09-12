@@ -80,6 +80,7 @@ export const THEME_OPTIONS = [
   "voyage",
   "humour",
   "true-crime",
+  "politique",
 ];
 
 export const LANGUAGE_OPTIONS = ["fr", "en", "es", "de", "it", "pt", "ja", "zh", "ko", "ru", "ar", "nl"];
@@ -121,4 +122,5 @@ export const THEME_LABELS: Record<string, string> = {
   voyage: "Voyage",
   humour: "Humour",
   "true-crime": "True crime",
+  politique: "Politique",
 };
