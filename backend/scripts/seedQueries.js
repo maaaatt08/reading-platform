@@ -218,3 +218,72 @@ export const TITLE_QUERIES = [
   "intitle:babel inauthor:kuang",
   "intitle:the invisible life of addie larue inauthor:schwab",
 ];
+
+// Cinquième vague : best-sellers contemporains et auteurs grand public par catégorie,
+// pour couvrir ce que les vagues précédentes (sujets génériques + classiques) manquent.
+export const EXTRA_QUERIES = [
+  // Thriller / polar grand public
+  'inauthor:"Dan Brown"',
+  'inauthor:"John Grisham"',
+  'inauthor:"James Patterson"',
+  'inauthor:"Lee Child"',
+  'inauthor:"David Baldacci"',
+  'inauthor:"Michael Connelly"',
+  'inauthor:"Harlan Coben"',
+  'inauthor:"Paula Hawkins"',
+  'inauthor:"Richard Osman"',
+  'inauthor:"Anthony Horowitz"',
+  'inauthor:"Ian Rankin"',
+  'inauthor:"Val McDermid"',
+  'inauthor:"Freida McFadden"',
+  // Polar nordique
+  'inauthor:"Stieg Larsson"',
+  'inauthor:"Jo Nesbø"',
+  'inauthor:"Henning Mankell"',
+  'inauthor:"Camilla Läckberg"',
+  // Romance / feel-good grand public
+  'inauthor:"Nicholas Sparks"',
+  'inauthor:"Liane Moriarty"',
+  'inauthor:"Danielle Steel"',
+  'inauthor:"Nora Roberts"',
+  'inauthor:"E.L. James"',
+  'inauthor:"Emily Henry"',
+  'inauthor:"Rebecca Yarros"',
+  'inauthor:"Ken Follett"',
+  // Polar / thriller français
+  'inauthor:"Michel Bussi"',
+  'inauthor:"Franck Thilliez"',
+  'inauthor:"Fred Vargas"',
+  'inauthor:"Virginie Grimaldi"',
+  'inauthor:"Aurélie Valognes"',
+  // Littérature coréenne / sud-asiatique
+  'inauthor:"Han Kang"',
+  'inauthor:"Min Jin Lee"',
+  'inauthor:"Arundhati Roy"',
+  'inauthor:"Vikram Seth"',
+  'inauthor:"Amitav Ghosh"',
+  // Jeunesse / classiques illustrés
+  'inauthor:"Roald Dahl"',
+  'inauthor:"C.S. Lewis"',
+  'inauthor:"Astrid Lindgren"',
+  'inauthor:"Antoine de Saint-Exupéry"',
+  'inauthor:"Lewis Carroll"',
+  'inauthor:"A.A. Milne"',
+  // BD / manga incontournables
+  'inauthor:"Eiichiro Oda"',
+  'inauthor:"Akira Toriyama"',
+  'inauthor:"Naoki Urasawa"',
+  // Essais / vulgarisation scientifique / histoire
+  'inauthor:"Bill Bryson"',
+  'inauthor:"Carl Sagan"',
+  'inauthor:"Jared Diamond"',
+  'inauthor:"Mary Beard"',
+  'inauthor:"Dan Ariely"',
+  'inauthor:"Malcolm Gladwell"',
+  // Développement personnel
+  'inauthor:"Brené Brown"',
+  'inauthor:"Ryan Holiday"',
+  // Cuisine
+  'inauthor:"Jamie Oliver"',
+  'inauthor:"Yotam Ottolenghi"',
+];

@@ -10,15 +10,22 @@ function normalizeDate(publishedDate) {
   return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
 }
 
+// Les colonnes books.title/author/genre sont des VARCHAR bornés (500/255/100) :
+// certains volumes Google Books (ex: listes d'auteurs à rallonge) dépassent la limite.
+function truncate(str, maxLength) {
+  if (!str) return str;
+  return str.length > maxLength ? str.slice(0, maxLength - 1) + "…" : str;
+}
+
 function normalizeVolume(volume) {
   const info = volume.volumeInfo || {};
   return {
     google_books_id: volume.id,
-    title: info.title,
-    author: (info.authors || []).join(", ") || null,
+    title: truncate(info.title, 500),
+    author: truncate((info.authors || []).join(", ") || null, 255),
     cover_url: info.imageLinks?.thumbnail?.replace("http://", "https://") || null,
     description: info.description || null,
-    genre: info.categories?.[0]?.split("/")[0]?.trim() || null,
+    genre: truncate(info.categories?.[0]?.split("/")[0]?.trim() || null, 100),
     release_date: normalizeDate(info.publishedDate),
   };
 }

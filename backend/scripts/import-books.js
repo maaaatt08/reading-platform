@@ -9,11 +9,12 @@
 //   node scripts/import-books.js --more                    -> importe la 2e vague de requêtes (MORE_QUERIES)
 //   node scripts/import-books.js --classics                -> importe les grands classiques par littérature (CLASSICS_QUERIES)
 //   node scripts/import-books.js --titles                  -> importe des titres précis très connus (TITLE_QUERIES)
+//   node scripts/import-books.js --extra                   -> importe des best-sellers contemporains supplémentaires (EXTRA_QUERIES)
 
 import pool from "../src/db/pool.js";
 import { searchGoogleBooks } from "./googleBooks.js";
 import { inferTags } from "./tagHeuristics.js";
-import { SEED_QUERIES, MORE_QUERIES, CLASSICS_QUERIES, TITLE_QUERIES } from "./seedQueries.js";
+import { SEED_QUERIES, MORE_QUERIES, CLASSICS_QUERIES, TITLE_QUERIES, EXTRA_QUERIES } from "./seedQueries.js";
 
 const args = process.argv.slice(2);
 const maxArg = args.find((a) => a.startsWith("--max="));
@@ -22,17 +23,20 @@ const shouldTag = !args.includes("--no-tags");
 const useMore = args.includes("--more");
 const useClassics = args.includes("--classics");
 const useTitles = args.includes("--titles");
+const useExtra = args.includes("--extra");
 const queries = args.filter((a) => !a.startsWith("--"));
 const queriesToRun =
   queries.length > 0
     ? queries
-    : useTitles
-      ? TITLE_QUERIES
-      : useClassics
-        ? CLASSICS_QUERIES
-        : useMore
-          ? MORE_QUERIES
-          : SEED_QUERIES;
+    : useExtra
+      ? EXTRA_QUERIES
+      : useTitles
+        ? TITLE_QUERIES
+        : useClassics
+          ? CLASSICS_QUERIES
+          : useMore
+            ? MORE_QUERIES
+            : SEED_QUERIES;
 
 async function upsertBook(book) {
   const result = await pool.query(
@@ -87,13 +91,17 @@ async function main() {
 
     for (const book of books) {
       if (!book.google_books_id) continue;
-      const { id, inserted: wasInserted } = await upsertBook(book);
-      if (wasInserted) inserted++;
-      else updated++;
+      try {
+        const { id, inserted: wasInserted } = await upsertBook(book);
+        if (wasInserted) inserted++;
+        else updated++;
 
-      if (shouldTag) {
-        const count = await applyTags(id, book);
-        if (count > 0) tagged++;
+        if (shouldTag) {
+          const count = await applyTags(id, book);
+          if (count > 0) tagged++;
+        }
+      } catch (err) {
+        console.error(`  Erreur pour le livre "${book.title}" : ${err.message}`);
       }
     }
   }

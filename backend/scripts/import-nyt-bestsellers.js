@@ -87,8 +87,8 @@ async function main() {
       const googleMatch = await resolveViaGoogleBooks(nytBook);
       const book = googleMatch || {
         google_books_id: nytBook.isbn13 ? `nyt-${nytBook.isbn13}` : null,
-        title: nytBook.title,
-        author: nytBook.author,
+        title: nytBook.title?.slice(0, 500) || null,
+        author: nytBook.author?.slice(0, 255) || null,
         cover_url: nytBook.cover_url,
         description: nytBook.description,
         genre: null,
@@ -96,10 +96,14 @@ async function main() {
       };
       if (!book.google_books_id || !book.title) continue;
 
-      const { id, inserted: wasInserted } = await upsertBook(book);
-      if (wasInserted) inserted++;
-      else updated++;
-      await applyTags(id, book);
+      try {
+        const { id, inserted: wasInserted } = await upsertBook(book);
+        if (wasInserted) inserted++;
+        else updated++;
+        await applyTags(id, book);
+      } catch (err) {
+        console.error(`  Erreur pour le livre "${book.title}" : ${err.message}`);
+      }
     }
   }
 
